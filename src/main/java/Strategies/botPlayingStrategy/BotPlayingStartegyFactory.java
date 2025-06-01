@@ -12,9 +12,9 @@ public class BotPlayingStartegyFactory {
 //        }else if(botDifficultyLevel.equals(BotDifficultyLevel.MEDIUM)){
 //            return new MeduimBotPlayingStrategy();
 //        }else{
-//            return new HardBOtPlayingStrategy();
+//            return new HardBotPlayingStrategy();
 //        }
-        //TODO : Add other medium and hArd
+        //TODO : Add other medium and hard
         return new EasyBotPlayingStarategy();
     }
 }
