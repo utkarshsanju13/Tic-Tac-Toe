@@ -1,11 +1,9 @@
 package controllers;
 
+
+
 import Strategies.winningStrategy.WinningStrategy;
-import exception.MoreThanOneBotException;
-import exception.PlayerCountMissMatchException;
-import models.Game;
-import models.GameState;
-import models.Player;
+import models.*;
 
 import java.util.List;
 
@@ -14,37 +12,36 @@ import java.util.List;
 //That mean sa gameController can start only a single game
 public class GameController {
 
-    public Game startGame(int dimensionOfBoard, List<Player> players, List<WinningStrategy> winningStrategies) throws MoreThanOneBotException, PlayerCountMissMatchException {
-
-
-        return Game
-                .getBuilder()
-                .setDimension(dimensionOfBoard)
-                .setPlayers(players)
-                .setWinningStrategy(winningStrategies)
-                .build();
-
-    }
-
-    public void makeMove(Game game){
-            game.makemove();
-    }
-
-    public GameState checkState(Game game){
-        return  null;
-    }
-
-    public Player getWinner(Game game){
+    //create game is the start of the game
+    public Game createGame(int dimension , List<Player> players, List<WinningStrategy> winningStrategies){
+//        return new Game().builder()
+//                .setDimension(dimension)
+//                .setPlayers(players)
+//                .setWinningStrategies()
+//                        .build();
         return null;
     }
 
-    public void displayBoard(){
-
+    public void displayGame(Game game){
+        game.getCurrentboard().displayBoard();
     }
 
-    public void undo(Game game){
-
+    public GameStatus getGameStatus(Game game){
+        return null;
     }
+
+    public Move executeMove(Game game, Player player){
+        return null;
+    }
+
+    public Player checkWinner(Game game, Move lastMover){
+        return null;
+    }
+
+    public Board undoMove(Game game, Move lastPlayedMove){
+        return null;
+    }
+
 
 
 

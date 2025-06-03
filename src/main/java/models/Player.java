@@ -1,78 +1,54 @@
 package models;
 
+import exception.InvalidRowOrColMoveException;
+
 import java.util.Scanner;
 
 public class Player {
 
-    private Long id;
-
-    private Symbol symbol;
-
+    private int id;
     private String name;
-
+    private char Symbol;
     private PlayerType playerType;
 
-    private Scanner scanner;
-
-
-    public Player(Long id, Symbol symbol, String name, PlayerType playerType) {
+    public Player(int id, String name, char symbol, PlayerType playerType) {
         this.id = id;
-        this.symbol = symbol;
         this.name = name;
+        Symbol = symbol;
         this.playerType = playerType;
-        this.scanner = new Scanner(System.in);
     }
 
-    public Long getId() {
-        return id;
+    public Move makeMove(Board board) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the row for the target cell");
+        int row = sc.nextInt();
+        System.out.println("Enter the col for the target cell");
+        int col = sc.nextInt();
+
+        if(row > board.getDimension()-1 || col > board.getDimension()-1){
+            throw new InvalidRowOrColMoveException("Please enter a valid row and coumn to make the vlaid move");
+        }
+        Cell playedMoveCell = board.getMatrix().get(row).get(col);
+
+        playedMoveCell.setCellState(CellState.FILLED);
+        playedMoveCell.setPlayer(this);
+
+        return new Move(playedMoveCell,this);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public char getSymbol() {
+        return Symbol;
     }
 
-    public Symbol getSymbol() {
-        return symbol;
+    public void setSymbol(char symbol) {
+        Symbol = symbol;
     }
-
-    public void setSymbol(Symbol symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public PlayerType getPlayerType() {
+
         return playerType;
     }
 
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
-    }
-
-    public Scanner getScanner() {
-        return scanner;
-    }
-
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    public Move makeMove(Board board){
-
-        System.out.println("Please Enter the row on which you want to place your symbol (0 based indexing)");
-        int row = scanner.nextInt();
-
-        System.out.println("Please Enter the col on which you want to place your symbol (0 based indexing)");
-        int col = scanner.nextInt();
-
-        return new Move(new Cell(row,col),this);
-
-
     }
 }

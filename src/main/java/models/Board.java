@@ -5,35 +5,44 @@ import java.util.List;
 
 public class Board {
 
-    private int size;
+    private int dimension;
+    private List<List<Cell>> matrix;
 
-    private List<List<Cell>> board;
+    public Board(int dimension) {
+        this.dimension = dimension;
+        matrix = new ArrayList<>();
 
-    public Board(int size){
-        this.size = size;
-        board = new ArrayList<>();
-
-        for(int i = 0; i < size; i++){
-            board.add(new ArrayList<>());
-            for(int j = 0; j < size; j++){
-                board.get(i).add(new Cell(i,j));
+        for(int i = 0 ; i < dimension; i++){
+            matrix.add(new ArrayList<>()); //Adding the internal arrayList
+            for(int j = 0; j < dimension; j++){
+                matrix.get(i).add(new Cell(i,j));
             }
         }
     }
 
-    public int getSize() {
-        return size;
+    public void displayBoard(){
+        for(int i = 0 ; i < dimension; i++){
+            List<Cell> row = matrix.get(i);
+            for(Cell cell : row){
+                cell.displaycell();
+            }
+            System.out.println();
+        }
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public List<List<Cell>> getMatrix() {
+        return matrix;
     }
 
-    public List<List<Cell>> getBoard() {
-        return board;
+    public void setMatrix(List<List<Cell>> matrix) {
+        this.matrix = matrix;
     }
 
-    public void setBoard(List<List<Cell>> board) {
-        this.board = board;
+    public int getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
     }
 }
